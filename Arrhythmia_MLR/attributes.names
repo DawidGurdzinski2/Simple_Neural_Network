@@ -1,0 +1,61 @@
+1 Age
+2 Sex
+3 Height
+4 Weight
+5 QRS_duration
+6 P-R_interval
+7 Q-T_interval
+8 T_interval
+9 P_interval
+10 QRS
+11 T
+12 P
+13 QRST
+14 J
+15 Heart_rate
+16 Q_wave
+17 R_wave
+18 S_wave
+19 R'_wave
+20 S'_wave
+21 Number_of_intrinsic_deflections
+22 Existence_of_ragged_R_wave
+23 Existence_of_diphasic_derivation_of_R_wave
+24 Existence_of_ragged_P_wave
+25 Existence_of_diphasic_derivation_of_P_wave
+26 Existence_of_ragged_T_wave
+27 Existence_of_diphasic_derivation_of_T_wave
+28 - 39 DII
+40 - 51 DIII
+52 - 63 AVR
+64 - 75 AVL 
+76 - 87 AVF 
+88 - 99 V1 
+100 - 111 V2 
+112 - 123 V3 
+124 - 135 V4 
+136 - 147 V5 
+148 - 159 V6 
+160 JJ_wave
+161 Q_wave_2
+162 R_wave_2
+163 S_wave_2
+164 R'_wave_2
+165 S'_wave_2
+166 P_wave_2
+167 T_wave_2    
+168 QRSA 
+169 QRSTA 
+170 - 179 DII_2
+180 - 189 DIII_2
+190 - 199 AVR_2
+200 - 209 AVL_2
+210 - 219 AVF_2 
+220 - 229 V1_2 
+230 - 239 V2_2 
+240 - 249 V3_2 
+250 - 259 V4_2
+260 - 269 V5_2
+270 - 279 V6_2
+280 sicknes
+    
