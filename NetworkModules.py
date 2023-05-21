@@ -49,7 +49,7 @@ class Softmax():
         self.outputs=exp/exp_sum
         return self.outputs
 
-    def backwards(self,dnextinputs):
+    def backward(self,dnextinputs):
         self.dinputs = np.zeros_like(dnextinputs)
         i=0
         for output, dnextinput in zip(self.outputs, dnextinputs):
@@ -93,3 +93,66 @@ class CrossEntropyLoss():
         self.dinputs=(-one_hot/self.inputs)/one_hot.shape[0]
         return self.dinputs
 ### Optimaizers ###
+
+
+
+
+class  Optimizer_Adam():
+    def __init__ (self, learning_rate = 0.001,decay =0.,epsilon =1e-7 ,beta_1 =0.9 ,beta_2 =0.999):
+        self.learning_rate = learning_rate
+        self.current_learning_rate = learning_rate
+        self.decay = decay
+        self.iterations = 0
+        self.epsilon  = epsilon
+        self.beta_1 = beta_1
+        self.beta_2 = beta_2
+
+
+    def start_update_params(self ):
+        if  self.decay:
+            self.current_learning_rate = self.learning_rate* ( 1./(1.+ self.decay*self.iterations))
+  
+
+    def update_params (self , layer ):
+        if not hasattr (layer, 'weight_second_momentums' ):
+            layer.weight_first_momentums = np.zeros_like(layer.weights)
+            layer.weight_second_momentums = np.zeros_like(layer.weights)
+            layer.bias_first_momentums = np.zeros_like(layer.biases)
+            layer.bias_second_momentums = np.zeros_like(layer.biases)
+
+
+        layer.weight_first_momentums = self.beta_1 *layer.weight_first_momentums + (1 - self.beta_1) * layer.dweights
+        layer.bias_first_momentums = self.beta_1 * layer.bias_first_momentums  +(1 - self.beta_1) * layer.dbiases
+        weight_first_momentums_corrected = layer.weight_first_momentums  /  (1 -  self.beta_1  ** (self.iterations  + 1))
+        bias_first_momentums_corrected = layer.bias_first_momentums  / (1 - self.beta_1 ** (self.iterations  +  1))
+        layer.weight_second_momentums = self.beta_2 * layer.weight_second_momentums  + (1 - self.beta_2) * layer.dweights ** 2 
+        layer.bias_second_momentums = self.beta_2 * layer.bias_second_momentums  + (1 - self.beta_2) * layer.dbiases **2
+        weight_second_momentums_corrected = layer.weight_second_momentums  / (1- self.beta_2 ** (self.iterations + 1))
+        bias_second_momentums_corrected = layer.bias_second_momentums  / (1-self.beta_2 ** (self.iterations + 1))
+        layer.weights += -self.current_learning_rate * weight_first_momentums_corrected /(np.sqrt(weight_second_momentums_corrected)+ self.epsilon)
+        layer.biases += -self.current_learning_rate * bias_first_momentums_corrected /(np.sqrt(bias_second_momentums_corrected)+ self.epsilon)
+
+
+    def stop_update_params( self ):
+        self.iterations  +=  1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
